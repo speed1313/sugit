@@ -12,7 +12,7 @@ func TestAdd(t *testing.T) {
 	}
 }
 
-func TestInit(t *testing.T){
+func TestGitInit(t *testing.T){
 	type args struct{
 		cmd_args []string
 	}
