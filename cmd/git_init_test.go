@@ -1,6 +1,7 @@
 package cmd
 
 import "testing"
+
 func Add(a, b int) int {
 	return a + b
 }
@@ -12,28 +13,28 @@ func TestAdd(t *testing.T) {
 	}
 }
 
-func TestGitInit(t *testing.T){
-	type args struct{
+func TestGitInit(t *testing.T) {
+	type args struct {
 		cmd_args []string
 	}
-	tests := []struct{
+	tests := []struct {
 		name string
 		args args
 		want bool
 	}{
 		{
-		name: "success with empty args",
-		args: args{
-			[]string{"git","init"},
+			name: "success with empty args",
+			args: args{
+				[]string{"git", "init"},
+			},
+			want: nil,
 		},
-		want: nil,
-	},
 	}
 
-	for _, tt := range tests{
+	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := Git_init(tt.args.cmd_args)
-			if got != tt.want{
+			if got != tt.want {
 				t.Errorf("init() = %v, want %v", got, tt.want)
 			}
 		})
