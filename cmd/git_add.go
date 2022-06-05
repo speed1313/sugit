@@ -41,15 +41,13 @@ func add_file_to_objects(file_name string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }
 func compress_file(file_name string) []byte {
 	data, err := os.ReadFile(file_name)
 	if err != nil {
 		log.Fatal(err)
 	}
-	formatted_data := fmt.Sprintf("blob %d\\0%v", len(data), string(data))
-	fmt.Println(formatted_data)
+	formatted_data := fmt.Sprintf("blob %d\000%v", len(data), string(data))
 	var b bytes.Buffer
 	w := zlib.NewWriter(&b)
 	w.Write([]byte(formatted_data))
@@ -63,10 +61,9 @@ func hash_file_name(file_name string) []byte {
 	if err != nil {
 		log.Fatal(err)
 	}
-	formatted_data := fmt.Sprintf("blob %d\\0%v", len(data), string(data))
+	formatted_data := fmt.Sprintf("blob %v\000%v", len(string(data)), string(data))
 	hashed_data := sha1.Sum([]byte(formatted_data))
 	dst := make([]byte, hex.EncodedLen(len(hashed_data)))
 	hex.Encode(dst, hashed_data[:])
-	fmt.Printf("%s", dst)
 	return dst
 }

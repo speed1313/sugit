@@ -13,7 +13,7 @@ func TestAdd(t *testing.T) {
 	}
 }
 
-func TestGitInit(t *testing.T) {
+func TestGitCatFile(t *testing.T) {
 	type args struct {
 		cmd_args []string
 	}
@@ -25,9 +25,9 @@ func TestGitInit(t *testing.T) {
 		{
 			name: "success with empty args",
 			args: args{
-				[]string{"git", "init"},
+				[]string{"git", "cat-file","test.txt"},
 			},
-			want: nil,
+			want: ,
 		},
 	}
 
