@@ -12,6 +12,7 @@ import (
 
 // git add adds the target files to .sugit/objects/hash[:2]/hash[2:]
 // hash[:]=sha-1('')
+// multiple files is ok.
 func Git_add(files []string) {
 	for _, file_name := range files {
 		if !is_file_exists(file_name) {
@@ -52,9 +53,7 @@ func compress_file(file_name string) []byte {
 	w := zlib.NewWriter(&b)
 	w.Write([]byte(formatted_data))
 	w.Close()
-	dst := make([]byte, hex.EncodedLen(len(b.Bytes())))
-	hex.Encode(dst, b.Bytes())
-	return dst
+	return b.Bytes()
 }
 func hash_file_name(file_name string) []byte {
 	data, err := os.ReadFile(file_name)
