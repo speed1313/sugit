@@ -26,7 +26,7 @@ func TestGitInit(t *testing.T){
 		args: args{
 			[]string{"git","init"},
 		},
-		want: true,
+		want: nil,
 	},
 	}
 
