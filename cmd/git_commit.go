@@ -35,7 +35,7 @@ func Git_commit(message []string){
 	tree_object := create_tree_object()
 	commit_object := ""
 	commit_object += fmt.Sprintf("tree %s\n", tree_object)
-	file, err := os.Open(".sugit/ref/heads/main")
+	file, err := os.Open(".sugit/refs/heads/main")
     if err != nil {
         log.Fatal(err)
     }
@@ -50,7 +50,7 @@ func Git_commit(message []string){
         log.Fatal(err)
     }
 	if parent_object != ""{
-		commit_object += fmt.Sprintf("parent %s\n", parent)
+		commit_object += fmt.Sprintf("parent %s\n", parent_object)
 	}
 	commit_object += fmt.Sprintf("author %s\n", author)
 	commit_object += fmt.Sprintf("committer %s\n\n", committer)
@@ -64,7 +64,7 @@ func Git_commit(message []string){
 		fmt.Println(err)
 	}
 	path_name := fmt.Sprintf(".sugit/objects/%s/%s", dst[:2], dst[2:])
-	err := os.WriteFile(path_name, []byte(commit_object), 0777)
+	err = os.WriteFile(path_name, []byte(commit_object), 0777)
 	if err != nil {
 		log.Fatal(err)
 	}
