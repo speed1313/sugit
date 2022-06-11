@@ -17,8 +17,10 @@ func main() {
 		cmd.Git_init(args[1:])
 	case "add":
 		cmd.Git_add(args[3:])
-    case "cat-file":
-        cmd.Git_cat_file(args[3:])
+	case "cat-file":
+		cmd.Git_cat_file(args[3:])
+	case "commit":
+		cmd.Git_commit(args[3:])
 	default:
 		fmt.Println("expected git [command]")
 	}

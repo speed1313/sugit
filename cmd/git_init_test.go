@@ -27,7 +27,7 @@ func TestGitCatFile(t *testing.T) {
 			args: args{
 				[]string{"git", "cat-file","test.txt"},
 			},
-			want: ,
+			want: true,
 		},
 	}
 
