@@ -52,3 +52,11 @@ committer speed1313
 
 message hoge%
 ```
+
+- git log
+```
+$ go run main.go git log
+90543b755444e4a23b0bbcff28733fa5d7ce90e0
+* 90543b7 hoge
+* 794fea0 message_hogehoge
+```
