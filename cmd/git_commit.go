@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"bufio"
 	"crypto/sha1"
 	"encoding/hex"
 	"fmt"
@@ -15,6 +16,7 @@ import (
 // commit object contains
 /* example of commit object
 tree 83de101e54e9d5b9ce77d0cf0870b93f4af7358b
+parent f42c445d9eaf0049b9fa9dc338c281c265c24a28
 author speed1313
 committer speed1313
 
@@ -33,6 +35,23 @@ func Git_commit(message []string){
 	tree_object := create_tree_object()
 	commit_object := ""
 	commit_object += fmt.Sprintf("tree %s\n", tree_object)
+	file, err := os.Open(".sugit/ref/heads/main")
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer file.Close()
+    scanner := bufio.NewScanner(file)
+	parent_object := ""
+    // optionally, resize scanner's capacity for lines over 64K, see next example
+    for scanner.Scan() {
+        parent_object = scanner.Text()
+    }
+    if err := scanner.Err(); err != nil {
+        log.Fatal(err)
+    }
+	if parent_object != ""{
+		commit_object += fmt.Sprintf("parent %s\n", parent)
+	}
 	commit_object += fmt.Sprintf("author %s\n", author)
 	commit_object += fmt.Sprintf("committer %s\n\n", committer)
 	commit_object += message[0]
