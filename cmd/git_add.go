@@ -15,24 +15,26 @@ import (
 // multiple files is ok.
 func Git_add(files []string) {
 	for _, file_name := range files {
-		if !is_file_exists(file_name) {
+		if !Is_file_exists(file_name) {
 			log.Fatal("file not exists")
 		}
 	}
 	for _, file_name := range files {
-		add_file_to_objects(file_name)
+		Add_file_to_objects(file_name)
 	}
 
 }
 
-func is_file_exists(file_name string) bool {
+// check if the file exists
+func Is_file_exists(file_name string) bool {
 	_, err := os.Stat(file_name)
 	return !os.IsNotExist(err)
 }
 
-func add_file_to_objects(file_name string) {
-	compressed_data := compress_file(file_name)
-	hashed_data := hash_file_name(file_name)
+// store the given file contents at that time to .git/objects directory.
+func Add_file_to_objects(file_name string) {
+	compressed_data := Compress_file(file_name)
+	hashed_data := Hash_file_name(file_name)
 	dir_name := fmt.Sprintf(".sugit/objects/%s", hashed_data[:2])
 	if err := os.MkdirAll(dir_name, 0777); err != nil {
 		fmt.Println(err)
@@ -43,7 +45,9 @@ func add_file_to_objects(file_name string) {
 		log.Fatal(err)
 	}
 }
-func compress_file(file_name string) []byte {
+
+// compress file by zlib and return the compressed one.
+func Compress_file(file_name string) []byte {
 	data, err := os.ReadFile(file_name)
 	if err != nil {
 		log.Fatal(err)
@@ -55,7 +59,9 @@ func compress_file(file_name string) []byte {
 	w.Close()
 	return b.Bytes()
 }
-func hash_file_name(file_name string) []byte {
+
+// return hashed file names.
+func Hash_file_name(file_name string) []byte {
 	data, err := os.ReadFile(file_name)
 	if err != nil {
 		log.Fatal(err)
