@@ -28,5 +28,27 @@ $ go run main.go git add test.txt
 - git cat-file
 ```
 $ go run main.go git cat-file ff49900e6b0daa37cf14f334e2fd0ba33a4d81d9
-blob 18This is test file.% 
+blob 18This is test file.%
+```
+- git commit
+```
+$ go run main.go git commit message_hogehoge
+// first commit object doesn't point parent commmit object
+
+$ cat .sugit/objects/79/4fea08c1d1797fe85067460d9733c393890566
+tree 0a448e7835621fa31ac9503d8cd31bacbc7e8f00
+author speed1313
+committer speed1313
+
+message message_hogehoge%
+
+$ go run main.go git commit hoge
+// commit object points the parent commit object.
+$ cat .sugit/objects/90/543b755444e4a23b0bbcff28733fa5d7ce90e0
+tree 0a448e7835621fa31ac9503d8cd31bacbc7e8f00
+parent 794fea08c1d1797fe85067460d9733c393890566
+author speed1313
+committer speed1313
+
+message hoge%
 ```

@@ -13,22 +13,10 @@ import (
 )
 
 // git commit creates commit object and HEAD file points it.
-// commit object contains
-/* example of commit object
-tree 83de101e54e9d5b9ce77d0cf0870b93f4af7358b
-parent f42c445d9eaf0049b9fa9dc338c281c265c24a28
-author speed1313
-committer speed1313
-
-add tmp.txt
-*/
-/* example of HEAD and heads/main
-$ cat .git/refs/heads/main
-27ad1210df49123d0aac5caa8eea9237c24e3592
-
-$ cat .git/HEAD
-ref: refs/heads/main
-*/
+// tree objects contains blob objects at that time.
+// commit message couldn't contain white space.
+// commit can commit any time.
+// if commit object's content is same, the hash value is also same. (this spec is not same as the git's one)
 func Git_commit(message []string){
 	author := "speed1313"
 	committer := "speed1313"
@@ -54,7 +42,7 @@ func Git_commit(message []string){
 	}
 	commit_object += fmt.Sprintf("author %s\n", author)
 	commit_object += fmt.Sprintf("committer %s\n\n", committer)
-	commit_object += message[0]
+	commit_object += fmt.Sprintf("message %s",message[0])
 	formatted_data := fmt.Sprintf("commit %v\000%v", len(commit_object), commit_object)
 	hashed_data := sha1.Sum([]byte(formatted_data))
 	dst := make([]byte, hex.EncodedLen(len(hashed_data)))

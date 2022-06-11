@@ -21,6 +21,8 @@ func main() {
 		cmd.Git_cat_file(args[3:])
 	case "commit":
 		cmd.Git_commit(args[3:])
+	case "log":
+		cmd.Git_log()
 	default:
 		fmt.Println("expected git [command]")
 	}
