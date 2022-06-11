@@ -60,3 +60,11 @@ $ go run main.go git log
 * 90543b7 hoge
 * 794fea0 message_hogehoge
 ```
+
+
+
+
+# Reference
+- https://www.notion.so/speed1313/Git-Internal-bec1af26038e4d76acde1fd4b7eec830
+- https://kaityo256.github.io/github/internals/index.html, ロボ太さん
+- https://git-scm.com/book/ja/v2/,   git pro 公式
